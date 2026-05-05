@@ -1,257 +1,176 @@
-import React, { useState, useEffect } from 'react';
-import { 
-  Menu, 
-  X, 
-  Camera, 
-  Layers, 
-  Smartphone, 
-  ExternalLink,
-  ChevronRight,
-  Bug,
-  MessageCircle,
-  Lightbulb,
-  Instagram,
-  Twitter,
-  Facebook
-} from 'lucide-react';
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Light Painter App | The Intuitive Light Painting Camera</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap');
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #0a0a0a;
+            color: #eeeeee;
+        }
 
-const App = () => {
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [scrolled, setScrolled] = useState(false);
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
 
-  useEffect(() => {
-    const handleScroll = () => {
-      setScrolled(window.scrollY > 20);
-    };
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
+        .gradient-text {
+            background: linear-gradient(to right, #60a5fa, #a855f7, #ec4899);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
 
-  const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
+        .hero-banner {
+            background: linear-gradient(rgba(0,0,0,0.5), rgba(10,10,10,1)), url('banner.jpg');
+            background-size: cover;
+            background-position: center;
+            min-height: 60vh;
+        }
 
-  const features = [
-    {
-      title: "Intuitive",
-      desc: "Live preview on screen as you draw with light. See your creation come to life in real-time.",
-      icon: <Lightbulb className="w-6 h-6 text-yellow-400" />
-    },
-    {
-      title: "Supported",
-      desc: "Works on Android 7+ but optimized for Android devices Version 11+ for maximum performance.",
-      icon: <Smartphone className="w-6 h-6 text-cyan-400" />
-    }
-  ];
+        .app-screenshot {
+            border-radius: 2rem;
+            border: 4px solid #1f2937;
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.5);
+        }
 
-  const galleryItems = [
-    { label: "drawings", color: "from-purple-500/20" },
-    { label: "landscape Painting", color: "from-blue-500/20" },
-    { label: "Car blur", color: "from-red-500/20" },
-    { label: "Image Stacking", color: "from-green-500/20" },
-    { label: "Time Blending", color: "from-orange-500/20" },
-    { label: "Light Trails", color: "from-pink-500/20" }
-  ];
+        .sample-card:hover .shot-label {
+            opacity: 1;
+        }
+    </style>
+</head>
+<body class="antialiased">
 
-  return (
-    <div className="min-h-screen bg-[#0a0a0c] text-slate-200 font-sans selection:bg-cyan-500/30">
-      {/* Navigation */}
-      <nav className={`fixed top-0 w-full z-50 transition-all duration-300 ${scrolled ? 'bg-black/80 backdrop-blur-lg border-b border-white/10 py-3' : 'bg-transparent py-5'}`}>
-        <div className="max-w-screen-xl mx-auto px-6 flex justify-between items-center">
-          <div className="flex items-center gap-3">
-            <div className="w-10 h-10 bg-gradient-to-br from-cyan-500 to-purple-600 rounded-xl flex items-center justify-center shadow-lg shadow-cyan-500/20">
-              <Camera className="text-white w-6 h-6" />
-            </div>
-            <span className="text-xl font-bold tracking-wider uppercase text-white">Light Painter</span>
-          </div>
-
-          <div className="hidden md:flex gap-8 text-sm font-medium uppercase tracking-widest text-slate-400">
-            <a href="#features" className="hover:text-cyan-400 transition-colors">Features</a>
-            <a href="#gallery" className="hover:text-cyan-400 transition-colors">Gallery</a>
-            <a href="#feedback" className="hover:text-cyan-400 transition-colors">Feedback</a>
-          </div>
-
-          <button onClick={toggleMenu} className="md:hidden p-2 text-white">
-            {isMenuOpen ? <X /> : <Menu />}
-          </button>
+    <!-- Hero Section -->
+    <header class="hero-banner flex flex-col items-center justify-center px-6 text-center pt-20">
+        <div class="flex items-center gap-4 mb-6">
+            <img src="logo.png" alt="Light Painter Logo" class="w-12 h-12 md:w-16 md:h-16 object-contain" onerror="this.src='https://via.placeholder.com/64?text=LP'">
+            <h1 class="text-4xl md:text-6xl font-extrabold tracking-tight text-white/90 mix-blend-lighten">
+                Welcome to the <span class="block md:inline">Light Painter App</span>
+            </h1>
         </div>
-      </nav>
-
-      {/* Hero Section with Banner */}
-      <section className="relative min-h-[80vh] flex items-center justify-center pt-20 overflow-hidden">
-        {/* Banner Background Image Placeholder */}
-        <div className="absolute inset-0 z-0">
-          <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/40 to-[#0a0a0c] z-10"></div>
-          <div className="w-full h-full bg-[url('https://images.unsplash.com/photo-1515895309288-a3815ab7cf81?auto=format&fit=crop&q=80&w=2000')] bg-cover bg-center grayscale-[0.5] contrast-[1.2]"></div>
-        </div>
-
-        <div className="relative z-20 max-w-screen-xl mx-auto px-6 text-center">
-          <div className="flex items-center justify-center gap-4 mb-6">
-             <Camera className="w-10 h-10 md:w-16 md:h-16 text-cyan-400 drop-shadow-[0_0_15px_rgba(34,211,238,0.8)]" />
-             <h1 className="text-4xl md:text-7xl font-black tracking-tighter text-white mix-blend-lighten">
-               Welcome to the <br/>Light Painter App
-             </h1>
-          </div>
-          <p className="text-xl md:text-2xl text-cyan-100/80 font-light tracking-wide mb-10 max-w-2xl mx-auto">
+        
+        <p class="text-xl md:text-2xl font-light text-gray-300 max-w-2xl mb-8">
             The most intuitive camera app for drawing with light.
-          </p>
-          <a 
-            href="https://play.google.com/store" 
-            target="_blank" 
-            rel="noopener noreferrer"
-            className="inline-flex items-center gap-3 px-8 py-4 bg-white text-black rounded-full font-bold hover:bg-cyan-400 transition-all hover:scale-105 active:scale-95 shadow-2xl shadow-cyan-500/20"
-          >
-            <Smartphone size={20} />
-            Get it on Google Play
-          </a>
-        </div>
-      </section>
+        </p>
 
-      {/* Features Section */}
-      <section id="features" className="py-24 px-6 relative">
-        <div className="max-w-screen-xl mx-auto grid md:grid-cols-2 gap-8">
-          {features.map((f, i) => (
-            <div key={i} className="p-10 rounded-[2rem] bg-white/5 border border-white/10 backdrop-blur-sm hover:border-cyan-500/50 transition-colors group">
-              <div className="mb-6 p-4 bg-white/5 inline-block rounded-2xl group-hover:scale-110 transition-transform">
-                {f.icon}
-              </div>
-              <h3 className="text-2xl font-bold mb-4 text-white">{f.title}</h3>
-              <p className="text-slate-400 leading-relaxed text-lg">{f.desc}</p>
-            </div>
-          ))}
-        </div>
-      </section>
+        <a href="https://play.google.com/store" class="transition transform hover:scale-105 active:scale-95">
+            <img src="https://play.google.com/intl/en_us/badges/static/images/badges/en_badge_web_generic.png" alt="Get it on Google Play" class="h-20">
+        </a>
+    </header>
 
-      {/* App Screenshots Section */}
-      <section className="py-20 px-6 bg-gradient-to-b from-transparent to-black/40">
-        <div className="max-w-screen-xl mx-auto">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
-            {/* Vertical Screenshot 1 */}
-            <div className="aspect-[9/16] bg-slate-800 rounded-[2.5rem] overflow-hidden border border-white/10 shadow-2xl relative group">
-               <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent flex items-end p-8 opacity-0 group-hover:opacity-100 transition-opacity">
-                 <span className="text-sm font-medium tracking-widest uppercase">Live View Interface</span>
-               </div>
-               <img src="https://images.unsplash.com/photo-1551650975-87deedd944c3?auto=format&fit=crop&q=80&w=1000" alt="App Screenshot 1" className="w-full h-full object-cover" />
-            </div>
-            {/* Vertical Screenshot 2 */}
-            <div className="aspect-[9/16] bg-slate-800 rounded-[2.5rem] overflow-hidden border border-white/10 shadow-2xl relative group">
-               <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent flex items-end p-8 opacity-0 group-hover:opacity-100 transition-opacity">
-                 <span className="text-sm font-medium tracking-widest uppercase">Settings & Brushes</span>
-               </div>
-               <img src="https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?auto=format&fit=crop&q=80&w=1000" alt="App Screenshot 2" className="w-full h-full object-cover" />
-            </div>
-          </div>
-          {/* Horizontal Usage Image */}
-          <div className="aspect-video md:aspect-[21/9] bg-slate-800 rounded-[2.5rem] overflow-hidden border border-white/10 shadow-2xl relative">
-             <div className="absolute inset-0 bg-black/20"></div>
-             <img src="https://images.unsplash.com/photo-1518998053574-53f0200f980d?auto=format&fit=crop&q=80&w=1600" alt="User using the app" className="w-full h-full object-cover" />
-             <div className="absolute bottom-8 left-8">
-                <span className="bg-cyan-500 text-black px-4 py-1 rounded-full text-xs font-bold uppercase tracking-widest">In Action</span>
-             </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Gallery Section */}
-      <section id="gallery" className="py-24 px-6">
-        <div className="max-w-screen-xl mx-auto">
-          <h2 className="text-3xl font-bold mb-12 text-center text-white tracking-tight uppercase">Created with Light Painter</h2>
-          <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
-            {galleryItems.map((item, i) => (
-              <div key={i} className="aspect-square relative rounded-3xl overflow-hidden border border-white/5 group">
-                <img 
-                  src={`https://images.unsplash.com/photo-1533038590840-1cde6e668a91?auto=format&fit=crop&q=60&w=800&sig=${i}`} 
-                  alt={item.label}
-                  className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700 opacity-60 group-hover:opacity-90"
-                />
-                <div className={`absolute inset-0 bg-gradient-to-t ${item.color} to-transparent opacity-60`}></div>
-                <div className="absolute bottom-4 left-4">
-                  <span className="text-[10px] md:text-xs uppercase tracking-[0.2em] font-medium text-white/40 drop-shadow-md">
-                    {item.label}
-                  </span>
+    <!-- Features -->
+    <section class="max-w-5xl mx-auto px-6 py-16">
+        <div class="grid md:grid-cols-2 gap-8">
+            <div class="glass-panel p-8 rounded-3xl">
+                <div class="w-12 h-12 bg-blue-500/20 rounded-full flex items-center justify-center mb-4 text-blue-400">
+                    <i class="fas fa-eye text-xl"></i>
                 </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Privacy & Feedback */}
-      <section className="py-24 px-6 bg-white/[0.02]">
-        <div className="max-w-screen-md mx-auto">
-          <div className="text-center mb-16">
-            <h3 className="text-xl font-bold text-white mb-4">Privacy Policy</h3>
-            <a 
-              href="privacypolicy.html" 
-              className="inline-flex items-center gap-2 text-cyan-400 hover:text-cyan-300 transition-colors border-b border-cyan-400/30 pb-1"
-            >
-              Read our data handling commitment <ExternalLink size={14} />
-            </a>
-          </div>
-
-          <div id="feedback" className="bg-black/40 rounded-[2.5rem] p-1 border border-white/5 shadow-inner">
-            <div className="flex items-center gap-3 p-6 mb-2">
-              <div className="p-2 bg-indigo-500/20 rounded-lg"><Bug className="text-indigo-400" size={20} /></div>
-              <h4 className="font-bold text-white uppercase tracking-wider text-sm">Submit Feedback or Bug Reports</h4>
+                <h3 class="text-2xl font-semibold mb-2">Intuitive</h3>
+                <p class="text-gray-400">Live preview on screen as you draw with light. See your creation come to life in real-time.</p>
             </div>
-            {/* Embedded Google Form */}
-            <div className="w-full overflow-hidden rounded-b-[2.3rem] bg-white h-[600px]">
-              <iframe 
-                src="https://docs.google.com/forms/d/e/1FAIpQLSedY-IlaPsp--PP93FT1sobCArNvYAgE_EaTwWSx0Yie1uIjA/viewform?embedded=true" 
-                width="100%" 
-                height="600" 
-                frameBorder="0" 
-                marginHeight="0" 
-                marginWidth="0"
-                title="Feedback Form"
-              >
-                Loading…
-              </iframe>
+            <div class="glass-panel p-8 rounded-3xl">
+                <div class="w-12 h-12 bg-purple-500/20 rounded-full flex items-center justify-center mb-4 text-purple-400">
+                    <i class="fas fa-mobile-alt text-xl"></i>
+                </div>
+                <h3 class="text-2xl font-semibold mb-2">Supported</h3>
+                <p class="text-gray-400">Works on Android 7+ but optimized for Android devices Version 11+ for maximum performance.</p>
             </div>
-          </div>
         </div>
-      </section>
+    </section>
 
-      {/* Footer */}
-      <footer className="py-12 px-6 border-t border-white/5 text-center">
-        <div className="max-w-screen-xl mx-auto">
-          <div className="flex items-center justify-center gap-2 mb-6">
-            <Camera size={18} className="text-cyan-500" />
-            <span className="text-sm font-bold uppercase tracking-widest text-white">Light Painter</span>
-          </div>
-          <div className="flex justify-center gap-6 mb-8 text-slate-500">
-            <a href="#" className="hover:text-cyan-400 transition-colors"><Instagram size={20} /></a>
-            <a href="#" className="hover:text-cyan-400 transition-colors"><Twitter size={20} /></a>
-            <a href="#" className="hover:text-cyan-400 transition-colors"><Facebook size={20} /></a>
-          </div>
-          <p className="text-xs text-slate-600 uppercase tracking-widest">
-            © 2024 Light Painter App. Professional tools for visual artists.
-          </p>
-        </div>
-      </footer>
-
-      {/* Mobile Sidebar Overlay */}
-      {isMenuOpen && (
-        <div className="fixed inset-0 z-50 md:hidden flex justify-end">
-          <div className="absolute inset-0 bg-black/60 backdrop-blur-sm" onClick={toggleMenu}></div>
-          <div className="relative w-4/5 h-full bg-[#0d0d0f] p-8 shadow-2xl animate-in slide-in-from-right duration-300 flex flex-col">
-            <div className="flex justify-end mb-12">
-              <button onClick={toggleMenu} className="p-2 text-white"><X size={24} /></button>
+    <!-- App Usage Section -->
+    <section class="max-w-6xl mx-auto px-6 py-16 bg-white/5 rounded-[3rem] my-8">
+        <div class="grid grid-cols-2 md:grid-cols-2 gap-4 md:gap-8 mb-8">
+            <div class="flex justify-center">
+                <img src="screenshot1.jpg" alt="App UI Screenshot" class="app-screenshot w-full max-w-[280px]" onerror="this.src='https://via.placeholder.com/300x600?text=UI+Screenshot+1'">
             </div>
-            <nav className="flex flex-col gap-8 text-lg font-bold uppercase tracking-tighter">
-              <a href="#features" onClick={toggleMenu} className="hover:text-cyan-400 transition-colors">Features</a>
-              <a href="#gallery" onClick={toggleMenu} className="hover:text-cyan-400 transition-colors">Gallery</a>
-              <a href="#feedback" onClick={toggleMenu} className="hover:text-cyan-400 transition-colors">Feedback</a>
-              <a href="privacypolicy.html" onClick={toggleMenu} className="text-sm font-normal text-slate-500">Privacy Policy</a>
-            </nav>
-            <div className="mt-auto">
-              <a href="https://play.google.com/store" className="w-full py-4 bg-white text-black rounded-2xl font-bold flex items-center justify-center gap-2">
-                Download Now <ChevronRight size={18} />
-              </a>
+            <div class="flex justify-center">
+                <img src="screenshot2.jpg" alt="App UI Screenshot" class="app-screenshot w-full max-w-[280px]" onerror="this.src='https://via.placeholder.com/300x600?text=UI+Screenshot+2'">
             </div>
-          </div>
         </div>
-      )}
-    </div>
-  );
-};
+        <div class="w-full">
+            <img src="usage.jpg" alt="Someone using the app" class="rounded-3xl w-full h-[300px] md:h-[500px] object-cover shadow-2xl" onerror="this.src='https://via.placeholder.com/1200x600?text=Action+Shot'">
+        </div>
+    </section>
 
-export default App;
+    <!-- Gallery Section -->
+    <section class="max-w-6xl mx-auto px-6 py-16">
+        <h2 class="text-3xl font-bold mb-10 text-center uppercase tracking-widest text-gray-500">Sample Creations</h2>
+        <div class="grid grid-cols-2 md:grid-cols-3 gap-4">
+            <!-- Sample 1 -->
+            <div class="relative sample-card group aspect-square overflow-hidden rounded-xl">
+                <img src="sample1.jpg" class="object-cover w-full h-full" onerror="this.src='https://via.placeholder.com/400?text=Sample'">
+                <div class="absolute inset-0 bg-black/40 flex items-end p-4 shot-label opacity-40 group-hover:opacity-100 transition-opacity">
+                    <span class="text-xs uppercase tracking-widest font-semibold">Drawings</span>
+                </div>
+            </div>
+            <!-- Sample 2 -->
+            <div class="relative sample-card group aspect-square overflow-hidden rounded-xl">
+                <img src="sample2.jpg" class="object-cover w-full h-full" onerror="this.src='https://via.placeholder.com/400?text=Sample'">
+                <div class="absolute inset-0 bg-black/40 flex items-end p-4 shot-label opacity-40 group-hover:opacity-100 transition-opacity">
+                    <span class="text-xs uppercase tracking-widest font-semibold">Landscape Painting</span>
+                </div>
+            </div>
+            <!-- Sample 3 -->
+            <div class="relative sample-card group aspect-square overflow-hidden rounded-xl">
+                <img src="sample3.jpg" class="object-cover w-full h-full" onerror="this.src='https://via.placeholder.com/400?text=Sample'">
+                <div class="absolute inset-0 bg-black/40 flex items-end p-4 shot-label opacity-40 group-hover:opacity-100 transition-opacity">
+                    <span class="text-xs uppercase tracking-widest font-semibold">Car Blur</span>
+                </div>
+            </div>
+            <!-- Sample 4 -->
+            <div class="relative sample-card group aspect-square overflow-hidden rounded-xl">
+                <img src="sample4.jpg" class="object-cover w-full h-full" onerror="this.src='https://via.placeholder.com/400?text=Sample'">
+                <div class="absolute inset-0 bg-black/40 flex items-end p-4 shot-label opacity-40 group-hover:opacity-100 transition-opacity">
+                    <span class="text-xs uppercase tracking-widest font-semibold">Image Stacking</span>
+                </div>
+            </div>
+            <!-- Sample 5 -->
+            <div class="relative sample-card group aspect-square overflow-hidden rounded-xl">
+                <img src="sample5.jpg" class="object-cover w-full h-full" onerror="this.src='https://via.placeholder.com/400?text=Sample'">
+                <div class="absolute inset-0 bg-black/40 flex items-end p-4 shot-label opacity-40 group-hover:opacity-100 transition-opacity">
+                    <span class="text-xs uppercase tracking-widest font-semibold">Time Blending</span>
+                </div>
+            </div>
+            <!-- Sample 6 -->
+            <div class="relative sample-card group aspect-square overflow-hidden rounded-xl">
+                <img src="sample6.jpg" class="object-cover w-full h-full" onerror="this.src='https://via.placeholder.com/400?text=Sample'">
+                <div class="absolute inset-0 bg-black/40 flex items-end p-4 shot-label opacity-40 group-hover:opacity-100 transition-opacity">
+                    <span class="text-xs uppercase tracking-widest font-semibold">Drawings</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Feedback Form -->
+    <section class="max-w-4xl mx-auto px-6 py-16">
+        <h2 class="text-2xl font-bold mb-6">Feedback & Support</h2>
+        <div class="rounded-3xl overflow-hidden glass-panel">
+            <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSedY-IlaPsp--PP93FT1sobCArNvYAgE_EaTwWSx0Yie1uIjA/viewform?embedded=true" width="100%" height="800" frameborder="0" marginheight="0" marginwidth="0">Loading…</iframe>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="border-t border-white/10 mt-12 py-12 px-6">
+        <div class="max-w-6xl mx-auto flex flex-col md:flex-row justify-between items-center gap-6">
+            <div class="flex flex-col items-center md:items-start">
+                <p class="text-sm text-gray-500">&copy; 2024 Light Painter App. All rights reserved.</p>
+                <a href="privacypolicy.html" class="text-blue-400 hover:underline text-sm mt-2">Privacy Policy</a>
+            </div>
+            <div class="flex gap-6 text-gray-400">
+                <a href="#" class="hover:text-white transition"><i class="fab fa-instagram text-xl"></i></a>
+                <a href="#" class="hover:text-white transition"><i class="fab fa-twitter text-xl"></i></a>
+                <a href="#" class="hover:text-white transition"><i class="fab fa-facebook text-xl"></i></a>
+            </div>
+        </div>
+    </footer>
+
+</body>
+</html>
