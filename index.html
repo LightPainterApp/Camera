@@ -60,6 +60,28 @@
             The most intuitive camera app for drawing with light.
         </p>
 
+        <!-- Join Testing Group Form -->
+        <div class="w-full lg:w-3/5 text-left">
+            <label for="testing-email" class="block text-sm font-medium text-gray-300 mb-2 tracking-wide">
+                Join the testing group by entering the email linked to your Google Play Store account:
+            </label>
+            
+            <!-- NOTE: Replace YOUR_FORM_ID_HERE and entry.123456789 with your Google Form action and input IDs -->
+            <form id="mG61Hd" action="https://docs.google.com/forms/u/0/d/1Xvpp7gPSwctVGF1AmkLjG9T5MISgXPKnVE4Z5WkX92g/formResponse" method="POST" target="hidden_iframe" class="relative flex items-center">
+                <input type="email" name="YPqjbf" id="whsOnd zHQkBf" required placeholder="your.email@gmail.com" 
+                    class="w-full bg-white/5 border border-white/20 rounded-xl py-3 pl-4 pr-12 text-white placeholder-gray-500 focus:outline-none focus:border-purple-500 focus:ring-1 focus:ring-purple-500 transition">
+                
+                <button type="submit" class="absolute right-2 top-1/2 -translate-y-1/2 w-8 h-8 bg-purple-600 hover:bg-purple-500 text-white rounded-lg flex items-center justify-center transition active:scale-95">
+                    <i class="fas fa-arrow-right text-sm"></i>
+                </button>
+            </form>
+            
+            <!-- Hidden iframe to process submission silently without forcing redirection -->
+            <iframe name="hidden_iframe" id="hidden_iframe" style="display:none;" onload="if(typeof submitted !== 'undefined' && submitted) { alert('Thank you! Your email has been submitted to the testing group.'); document.getElementById('testerForm').reset(); }"></iframe>
+            <script>let submitted = false; document.getElementById('testerForm').onsubmit = function() { submitted = true; }</script>
+        </div>
+        
+        <a href="https://docs.google.com/forms/d/e/1FAIpQLSd_mXb9Lt8MtCUWih1l3fJoWRvL4u-zoL5qfTIYokaX5sVKKQ/viewform?usp=publish-editor
         <a href="https://play.google.com/apps/internaltest/4699602283994706929" class="transition transform hover:scale-105 active:scale-95">
             <img src="https://play.google.com/intl/en_us/badges/static/images/badges/en_badge_web_generic.png" alt="Get it on Google Play" class="h-20">
         </a>
