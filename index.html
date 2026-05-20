@@ -60,31 +60,67 @@
             The most intuitive camera app for drawing with light.
         </p>
 
-        <!-- Join Testing Group Form -->
-        <div class="w-full lg:w-3/5 text-left">
-            <label for="testing-email" class="block text-sm font-medium text-gray-300 mb-2 tracking-wide">
+        <!-- Combined Form and Play Store Section -->
+        <!-- Form ID= mG61Hd -->
+        <!-- Form Action= https://docs.google.com/forms/u/0/d/1Xvpp7gPSwctVGF1AmkLjG9T5MISgXPKnVE4Z5WkX92g/formResponse -->
+        <!-- Question Name= YPqjbf -->
+        <!-- Question ID= whsOnd zHQkBf -->
+        <!-- Play Link= https://play.google.com/apps/internaltest/4699602283994706929 -->
+        <div class="w-full max-w-4xl mx-auto bg-black/40 backdrop-blur-md p-6 md:p-8 rounded-3xl border border-white/10 mb-8 flex flex-col items-center justify-center gap-6">
+            
+            <label for="testing-email" class="block text-sm md:text-base font-medium text-gray-300 tracking-wide text-center max-w-lg">
                 Join the testing group by entering the email linked to your Google Play Store account:
             </label>
-            
-            <!-- NOTE: Replace YOUR_FORM_ID_HERE and entry.123456789 with your Google Form action and input IDs -->
-            <form id="mG61Hd" action="https://docs.google.com/forms/u/0/d/1Xvpp7gPSwctVGF1AmkLjG9T5MISgXPKnVE4Z5WkX92g/formResponse" method="POST" target="hidden_iframe" class="relative flex items-center">
-                <input type="email" name="YPqjbf" id="whsOnd zHQkBf" required placeholder="your.email@gmail.com" 
-                    class="w-full bg-white/5 border border-white/20 rounded-xl py-3 pl-4 pr-12 text-white placeholder-gray-500 focus:outline-none focus:border-purple-500 focus:ring-1 focus:ring-purple-500 transition">
+
+            <div class="flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-6 w-full max-w-2xl">
+                <!-- Join Testing Group Form -->
+                <div class="flex flex-col items-center w-full sm:w-auto">
+                    <form id="mG61Hd" action="https://docs.google.com/forms/u/0/d/1Xvpp7gPSwctVGF1AmkLjG9T5MISgXPKnVE4Z5WkX92g/formResponse" method="POST" target="hidden_iframe" class="relative flex items-center w-64 h-14">
+                        <input type="email" name="YPqjbf" id="whsOnd zHQkBf" required placeholder="your.email@gmail.com" 
+                            class="w-full h-full bg-white/5 border border-white/20 rounded-xl pl-4 pr-12 text-white placeholder-gray-500 focus:outline-none focus:border-purple-500 focus:ring-1 focus:ring-purple-500 transition text-sm">
+                        
+                        <button type="submit" class="absolute right-2 top-1/2 -translate-y-1/2 w-10 h-10 bg-purple-600 hover:bg-purple-500 text-white rounded-lg flex items-center justify-center transition active:scale-95">
+                            <i class="fas fa-arrow-right text-xs"></i>
+                        </button>
+                    </form>
+                    <!-- Modern inline feedback success label replacing alert() -->
+                    <div id="signup-success" class="hidden text-emerald-400 text-xs mt-2 font-medium tracking-wide animate-pulse">
+                        <i class="fas fa-circle-check mr-1"></i> Email registered successfully!
+                    </div>
+                </div>
                 
-                <button type="submit" class="absolute right-2 top-1/2 -translate-y-1/2 w-8 h-8 bg-purple-600 hover:bg-purple-500 text-white rounded-lg flex items-center justify-center transition active:scale-95">
-                    <i class="fas fa-arrow-right text-sm"></i>
-                </button>
-            </form>
+                <!-- Google Play Link styled to perfectly match input container -->
+                <div class="w-64 h-14 flex items-center justify-center overflow-hidden rounded-xl border border-white/10 bg-black hover:border-white/20 hover:scale-105 active:scale-95 transition-all">
+                    <a href="https://play.google.com/apps/internaltest/4699602283994706929" class="h-full w-full flex items-center justify-center">
+                        <img src="https://play.google.com/intl/en_us/badges/static/images/badges/en_badge_web_generic.png" alt="Get it on Google Play" class="h-[145%] max-w-none object-contain select-none pointer-events-none">
+                    </a>
+                </div>
+            </div>
             
             <!-- Hidden iframe to process submission silently without forcing redirection -->
-            <iframe name="hidden_iframe" id="hidden_iframe" style="display:none;" onload="if(typeof submitted !== 'undefined' && submitted) { alert('Thank you! Your email has been submitted to the testing group.'); document.getElementById('testerForm').reset(); }"></iframe>
-            <script>let submitted = false; document.getElementById('testerForm').onsubmit = function() { submitted = true; }</script>
+            <iframe name="hidden_iframe" id="hidden_iframe" style="display:none;" onload="handleIframeLoad()"></iframe>
+            <script>
+                let submitted = false; 
+                document.getElementById('testerForm').onsubmit = function() { 
+                    submitted = true; 
+                }
+                function handleIframeLoad() {
+                    if(submitted) {
+                        const successLabel = document.getElementById('signup-success');
+                        if(successLabel) {
+                            successLabel.classList.remove('hidden');
+                            setTimeout(() => {
+                                successLabel.classList.add('hidden');
+                            }, 6000);
+                        }
+                        document.getElementById('testerForm').reset();
+                        submitted = false;
+                    }
+                }
+            </script>
         </div>
+
         
-        <a href="https://docs.google.com/forms/d/e/1FAIpQLSd_mXb9Lt8MtCUWih1l3fJoWRvL4u-zoL5qfTIYokaX5sVKKQ/viewform?usp=publish-editor
-        <a href="https://play.google.com/apps/internaltest/4699602283994706929" class="transition transform hover:scale-105 active:scale-95">
-            <img src="https://play.google.com/intl/en_us/badges/static/images/badges/en_badge_web_generic.png" alt="Get it on Google Play" class="h-20">
-        </a>
     </header>
 
     <!-- Features -->
